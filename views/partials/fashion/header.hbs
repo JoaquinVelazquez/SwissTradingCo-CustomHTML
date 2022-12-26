@@ -1,0 +1,342 @@
+<div class="header-wrapper header-wrapper--fixed {{headerAdditionalClasses}}" id="header-wrapper"
+  data-ms-theme="fashion">
+  {{#if flash.enabled}}
+  {{> components/flash}}
+  {{/if}}
+  {{> components/cookieDisclaimer}}
+  <header role="banner" class="nav-fashion-header" itemtype="http://schema.org/Store" itemid="#this" itemscope="">
+
+    <!-- Desktop menu sidebar -->
+    <div itemscope itemtype="http://schema.org/SiteNavigationElement"
+      class="nav-fashion-menu nav-fashion-sidebar-menu header--custom-background" id="nav-vertical-list">
+      <div class="close-sidebar-button">
+        <input type="checkbox" id="nav-fashion__close-sidebar-button" name="nav-tools-header__menu-switch">
+        <label for="nav-fashion__close-sidebar-button" id="close-sidebar-button">
+          <span class="nav-header__close-sidebar-button nav-header__hamburger"></span>
+          <span class="nav-header__close-sidebar-button nav-header__hamburger"></span>
+        </label>
+      </div>
+      <ul class="sidebar-menu-list">
+        {{#if sale}}
+        <li class="nav-fashion-list--vertical__item nav-fashion__sale-link header--custom-border">
+          <a href="{{sale.url}}" class="header--custom-text">{{sale.text}}</a>
+        </li>
+        <li class="nav-fashion-list__item nav-fashion__hamburger-button" id="nav-fashion__hamburger-button"></li>
+        {{/if}}
+        {{#each menu}}
+        <li class="nav-fashion-list--vertical__item">
+          <a href="{{this.url}}" class="header--custom-text">{{this.name}}</a>
+          {{#if this.nodes}}
+          <div>
+            <input type="checkbox" data-js="categories-toggle" id="desktop-{{@index}}"
+              name="nav-tools-header__menu-switch">
+            <label for="desktop-{{@index}}" class="toggle-menu">
+              <span class="nav-header__toggle nav-header__hamburger"></span>
+              <span class="nav-header__toggle nav-header__hamburger"></span>
+            </label>
+          </div>
+          {{/if}}
+        </li>
+        <div class="nav-fashion-list--vertical__subitem-container" data-toggle="desktop-{{@index}}">
+          {{#each this.nodes}}
+          <li class="nav-fashion-list--vertical__subitem">
+            <a href="{{this.url}}" class="header--custom-text">{{this.name}}</a>
+            {{#if this.nodes}}
+            <div>
+              <input type="checkbox" data-js="categories-toggle" id="desktop-attr-{{@../index}}-{{@index}}"
+                name="nav-tools-header__menu-switch">
+              <label for="desktop-attr-{{@../index}}-{{@index}}" class="toggle-menu">
+                <span class="nav-header__toggle nav-header__hamburger"></span>
+                <span class="nav-header__toggle nav-header__hamburger"></span>
+              </label>
+            </div>
+            {{/if}}
+          </li>
+          <div class="nav-fashion-list--vertical__attr-container" data-toggle="desktop-attr-{{@../index}}-{{@index}}">
+            {{#each this.nodes}}
+            <li class="nav-fashion-list--vertical__attribute">
+              <a href="{{this.url}}" class="header--custom-text">{{this.name}}</a>
+            </li>
+            {{/each}}
+          </div>
+          {{/each}}
+        </div>
+        <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+        {{/each}}
+
+        <li class="nav-fashion-list--vertical__item how-buy__button" data-js="how-buy__button">
+          <a href="{{linkToHowBuy.href}}" class="header--custom-text">{{linkToHowBuy.label}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-fashion-header__bounds">
+      <!-- Desktop menu navbar categories -->
+      <ul itemscope itemtype="http://schema.org/SiteNavigationElement" class="nav-fashion-list" id="nav-list">
+        <li class="nav-fashion-list__item nav-fashion__hamburger-button" id="nav-fashion__hamburger-button">
+          <input type="checkbox" id="mobile-categories-menu-switch" name="nav-tools-header__menu-switch">
+          <label for="mobile-categories-menu-switch" id="hamburguer-menu">
+            <span class="nav-header__hamburger"></span>
+            <span class="nav-header__hamburger"></span>
+            <span class="nav-header__hamburger"></span>
+          </label>
+        </li>
+
+        {{#each menu}}
+        <li class="nav-fashion-list__item" data-js="{{this.name}}-{{@index}}" has-childs={{this.nodes}}>
+          <a href="{{this.url}}">
+            <span class="header--custom-text">{{this.name}}</span>
+          </a>
+        </li>
+        {{/each}}
+
+        {{#if sale.text}}
+        <li class="nav-fashion-list__item nav-fashion__sale-link" id="nav-fashion__sale-link">
+          <a href="{{sale.url}}" class="header--custom-text">{{sale.text}}</a>
+        </li>
+        {{/if}}
+
+        <li class="nav-fashion-list__item nav-fashion__see-more" id="nav-fashion__see-more" has-childs="true">
+          <a class="header--custom-text">
+            <span>{{i18n.moreCategories}}</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile responsive menu -->
+      <div itemscope itemtype="http://schema.org/SiteNavigationElement"
+        class="nav-fashion-menu nav-fashion-responsive-menu header--custom-background" id="responsive-menu">
+        <form class="nav-fashion-search-form header--custom-border" id="search-form-responsive" novalidate="">
+          <button type="submit" class="search-button">
+            {{> fashion/views/partials/search}}
+          </button>
+          <input type="text" placeholder="{{i18n.smallPlaceholder}}" class="header--custom-text"
+            id="search-input-responsive" required="" autocomplete=" off">
+        </form>
+
+        <ul class="responsive-menu-list">
+          <li class="nav-fashion-list--vertical__item nav-fashion__sale-link header--custom-border">
+            <a href="/_Discount_5-100_NoIndex_True" class="header--custom-text descuentos-mobile">Descuentos<img src="https://cdn-icons-png.flaticon.com/512/1685/1685230.png" alt=""></a>
+          </li>
+          
+          <li class="nav-fashion-list__item nav-fashion__hamburger-button" id="nav-fashion__hamburger-button"></li>
+
+          <li class="nav-fashion-list--vertical__item">
+            <a href="/linea-fitness" class="header--custom-text">Linea Fitness</a> <img src="https://cdn-icons-png.flaticon.com/512/25/25638.png" alt="" class="linea-fitness-flecha">
+          </li>
+
+          <ul class="subcategoria-mobile linea-fitness invisible">
+            <li><a href="/wonder-core-smart">Wonder Core Smart</a></li>
+            <li><a href="/wonder-core-2">Wonder Core 2</a></li>
+            <li><a href="/smartfit-pro">Smart Fit Pro</a></li>
+            <li><a href="/my-face-lift">My Face Lift</a></li>
+          </ul>
+          <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+
+          <li class="nav-fashion-list--vertical__item">
+            <a href="/linea-gourmet" class="header--custom-text">Linea Gourmet</a> <img src="https://cdn-icons-png.flaticon.com/512/25/25638.png" alt="" class="linea-gourmet-flecha">
+          </li>
+          
+          <ul class="subcategoria-mobile linea-gourmet invisible">
+            <li><a href="/cerafit-fusion">Cerafit Fusion</a></li>
+            <li><a href="/flavorstone">FlavorStone</a></li>
+            <li><a href="/power-xl-air-fryer">Power XL Air Fryer</a></li>
+            <li><a href="/power-xl-parrilla">Power XL Parrilla</a></li>
+            <li><a href="/power-xl-juguera">Power XL Juguera</a></li>
+            <li><a href="/the-trusted-butcher">The Trusted Butcher</a></li>
+            {{!-- <li><a href="/balanza-de-cocina">Balanza de Cocina</a></li>
+            <li><a href="/tabla-de-cortar">Tabla de Cortar</a></li>
+            <li><a href="/set-de-pinzas">Set de Pinzas</a></li> --}}
+          </ul>
+          <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+
+          <li class="nav-fashion-list--vertical__item">
+            <a href="/linea-bienestar" class="header--custom-text">Linea Bienestar</a> <img src="https://cdn-icons-png.flaticon.com/512/25/25638.png" alt="" class="linea-bienestar-flecha">
+          </li>
+          
+          <ul class="subcategoria-mobile linea-bienestar invisible">
+            <li><a href="/gymform-leg-action">GymForm Leg Action</a></li>
+            <li><a href="/my-face-lift">My Face Lift</a></li>
+            <li><a href="/comfy-wraps">Comfy Wraps</a></li>
+            <li><a href="/pure-h2o">Pure H2O</a></li>
+          </ul>
+          <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+
+          <li class="nav-fashion-list--vertical__item">
+            <a href="/linea-casa" class="header--custom-text">Linea Casa</a> <img src="https://cdn-icons-png.flaticon.com/512/25/25638.png" alt="" class="linea-casa-flecha">
+          </li>
+          
+          <ul class="subcategoria-mobile linea-casa invisible">
+            <li><a href="/pure-h2o">Pure H2O</a></li>
+            <li><a href="/paint-blast-4x4">Paint Blast 4x4</a></li>
+            <li><a href="/starlyf-table-express">Starlyf Table Express</a></li>
+            {{!-- <li><a href="/cleanica-360">Cleanica 360</a></li> --}}
+            <li><a href="/pest-reject-pro">Pest Reject Pro</a></li>
+            <li><a href="/neatron">Neatron</a></li>
+            <li><a href="/fold-a-step">Fold a Step</a></li>
+          </ul>
+          <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+
+          <li class="nav-fashion-list--vertical__item">
+            <a href="/nuestros-productos" class="header--custom-text">Productos</a>
+          </li>
+          <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+
+          <li class="nav-fashion-list--vertical__item how-buy__button how-buy-button__mobile" id="how-buy__button"
+            data-js="how-buy__button">
+            <a href="{{linkToHowBuy.href}}" class="header--custom-text">{{linkToHowBuy.label}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Logo -->
+      <div class="nav-fashion-header__title">
+        {{#if logo}}
+        <a class="nav-fashion-header__logo" href="/" id="logo-wrapper">
+          <span class="nav-header__title-hidden">{{shop.name}}</span>
+          <img class="nav-header__image" src="https://iili.io/gBTV14.png" alt="{{shop.name}}" itemprop="logo" />
+        </a>
+        {{else}}
+        <a class="nav-fashion-header__logo header--custom-text" href="/" id="logo-wrapper">{{name}}</a>
+        {{/if}}
+      </div>
+
+      <!-- Icons -->
+      <nav class="nav-fashion-header__nav-icons" id="nav-fashion-header__nav-icons">
+        <div class="nav-icons-group">
+          <form class="nav-search-form" id="search-form" novalidate="">
+            <input type="text" class="nav-search-input header--custom-border header--custom-text"
+              placeholder="{{i18n.smallPlaceholder}}" id="search-input" required="" autocomplete=" off">
+            <button type="submit" class="search-button" id="nav-search-button">
+              {{> fashion/views/partials/search}}
+            </button>
+          </form>
+          {{#if contact}}
+          <a href="{{contact.href}}" class="contact-button" rel="nofollow">
+            {{> fashion/views/partials/contact}}
+          </a>
+          {{/if}}
+          {{#if cart}}
+          <a href="{{cart.href}}" title="Carrito" class="cart-button" id="nav-cart">
+            {{> fashion/views/partials/cart-badge}}
+            {{> fashion/views/partials/cart}}
+          </a>
+          {{/if}}
+        </div>
+      </nav>
+    </div>
+
+    <!-- Desktop menu popover -->
+    <div itemscope itemtype="http://schema.org/SiteNavigationElement" id="popover-menu"
+      class="header--custom-background">
+      <!-- Categories -->
+      <div class="nav-bounds nav-fashion-desktop-categories-popover">
+        {{#each menu}}
+        <div class="nav-fashion-list--horizontal__item" data-toggle="{{this.name}}-{{@index}}">
+          <li class="nav-fashion-list--horizontal__category header--custom-text">
+            <a href="{{this.url}}">{{this.name}}</a>
+            <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+          </li>
+          {{#each this.nodes}}
+          <div class="nav-fashion-list--horizontal__subitem">
+            <li class="header--custom-text">
+              <a href="{{this.url}}">{{this.name}}</a>
+            </li>
+            <div class="nav-fashion-list--horizontal__attr-container">
+              {{#each this.nodes}}
+              <li class="nav-fashion-list--horizontal__attribute header--custom-text">
+                <a href="{{this.url}}">{{this.name}}</a>
+              </li>
+              {{/each}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        {{/each}}
+      </div>
+      <!-- See more -->
+      <div class="nav-bounds nav-fashion-desktop-see-more-popover" id="nav-popover-list">
+        {{#each menu}}
+        <div class="nav-fashion-list--horizontal__item" data-toggle="see-more">
+          <li class="nav-fashion-list--horizontal__category header--custom-text">
+            <a href="{{this.url}}">{{this.name}}</a>
+            <hr class="nav-fashion-list--vertical__hr header--custom-border" />
+          </li>
+          <div>
+            {{#each this.nodes}}
+            <li class="nav-fashion-list--horizontal__subitem header--custom-text">
+              <a href="{{this.url}}">{{this.name}}</a>
+            </li>
+            <div class="nav-fashion-list--horizontal__attr-container">
+              {{#each this.nodes}}
+              <li class="nav-fashion-list--horizontal__attribute header--custom-text">
+                <a href="{{this.url}}">{{this.name}}</a>
+              </li>
+              {{/each}}
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <nav class="contenedor-nav">
+      <ul class="navbar">
+        <li>
+          <a href="/linea-fitness_DisplayType_G" class="link-nav primer-link">Linea Fitness</a>
+
+          <ul>
+            <li><a href="/wonder-core-smart_DisplayType_G">Wonder Core Smart</a></li>
+            <li><a href="/wonder-core-2_DisplayType_G">Wonder Core 2</a></li>
+            <li><a href="/smartfit-pro_DisplayType_G">Smart Fit Pro</a></li>
+            <li><a href="/my-face-lift_DisplayType_G">My Face Lift</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="/linea-gourmet_DisplayType_G" class="link-nav">Linea Gourmet</a>
+
+          <ul>
+            <li><a href="/cerafit-fusion_DisplayType_G">Cerafit Fusion</a></li>
+            <li><a href="/flavorstone_DisplayType_G">FlavorStone</a></li>
+            <li><a href="/power-xl-air-fryer_DisplayType_G">Power XL Air Fryer</a></li>
+            <li><a href="/power-xl-parrilla_DisplayType_G">Power XL Parrilla</a></li>
+            <li><a href="/power-xl-juguera_DisplayType_G">Power XL Juguera</a></li>
+            <li><a href="/the-trusted-butcher_DisplayType_G">The Trusted Butcher</a></li>
+            {{!-- <li><a href="/balanza-de-cocina_DisplayType_G">Balanza de Cocina</a></li>
+            <li><a href="/tabla-de-cortar_DisplayType_G">Tabla de Cortar</a></li>
+            <li><a href="/set-de-pinzas_DisplayType_G">Set de Pinzas</a></li> --}}
+          </ul>
+        </li>
+
+        <li>
+          <a href="/linea-bienestar_DisplayType_G" class="link-nav">Linea Bienestar</a>
+
+          <ul>
+            <li><a href="/gymform-leg-action_DisplayType_G">GymForm Leg Action</a></li>
+            <li><a href="/my-face-lift_DisplayType_G">My Face Lift</a></li>
+            <li><a href="/comfy-wraps_DisplayType_G">Comfy Wraps</a></li>
+            <li><a href="/pure-h2o_DisplayType_G">Pure H2O</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="/linea-casa_DisplayType_G" class="link-nav">Linea Casa</a>
+
+          <ul>
+            <li><a href="/pure-h2o_DisplayType_G">Pure H2O</a></li>
+            <li><a href="/paint-blast-4x4_DisplayType_G">Paint Blast 4x4</a></li>
+            <li><a href="/starlyf-table-express_DisplayType_G">Starlyf Table Express</a></li>
+            {{!-- <li><a href="/cleanica-360_DisplayType_G">Cleanica 360</a></li> --}}
+            <li><a href="/pest-reject-pro_DisplayType_G">Pest Reject Pro</a></li>
+            <li><a href="/neatron_DisplayType_G">Neatron</a></li>
+            <li><a href="/fold-a-step_DisplayType_G">Fold a Step</a></li>
+          </ul>
+        </li>
+        <li><a href="/nuestros-productos_DisplayType_G" class="link-nav">Productos</a></li>
+        <li><a href="/_DisplayType_G_Discount_5-100_NoIndex_True" class="link-nav descuentos">Descuentos <img src="https://cdn-icons-png.flaticon.com/512/1685/1685230.png" alt=""></a></li>
+      </ul>
+    </nav>
+  </header>
+</div>
