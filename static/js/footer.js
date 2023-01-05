@@ -1,8 +1,5 @@
 const URLactual = window.location.pathname;
 
-let favicon = document.querySelector("link[rel='shortcut icon']")
-favicon.href = 'https://iili.io/hisKSs.png';
-
 let pautas = document.querySelector(".pautas-contenedor");
 let glider = document.querySelector(".glider-contain");
 let iconosCategorias = document.querySelectorAll(".contenedor-iconos-categorias");
