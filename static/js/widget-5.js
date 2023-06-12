@@ -27,3 +27,4 @@ lineaCasaFlecha.addEventListener('click', function(){
     lineaCasaFlecha.classList.toggle("animacion-rotacion");
     lineaCasaMobile.classList.toggle("invisible");
 });
+

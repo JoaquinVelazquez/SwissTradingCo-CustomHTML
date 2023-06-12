@@ -287,3 +287,5 @@ if (URLactual == "/beneficios") {
         throw new Error("Error controlado");
     }
 }
+
+
